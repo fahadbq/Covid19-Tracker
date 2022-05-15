@@ -14,6 +14,13 @@ const TrackerContainer = (props) => {
             .catch(err => err.message)
     }, [])
 
+    const countryChange = (event) => {
+        const readCountry = event.target.value
+
+        setCountry(readCountry)
+    }
+
+
     return (
         <div className="app__header">
             <h2> COVID-19-TRACKER </h2>
@@ -22,6 +29,7 @@ const TrackerContainer = (props) => {
                 <Select
                     variant="outlined"
                     value={country}
+                    onChange={countryChange}
                 >   
                     <MenuItem value="worldwide"> Worldwide </MenuItem>
                     {countries.map((country, i) => {
