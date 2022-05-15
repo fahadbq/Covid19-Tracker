@@ -1,10 +1,13 @@
-import './App.css';
-import TrackerContainer from './components/TrackerContainer'
+import "./App.css";
+import LeftContainer from "./components/leftContainer/LeftContainer";
+import RightContainer from "./components/rightContainer/RightContainer";
 
 function App() {
   return (
     <div className="app">
-      <TrackerContainer />
+      <LeftContainer />
+
+      <RightContainer />
     </div>
   );
 }
