@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
-import InfoBox from "./InfoBox";
-
 const TrackerForm = (props) => {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");

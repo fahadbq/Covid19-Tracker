@@ -3,6 +3,7 @@ import { Card, CardContent } from "@mui/material"
 
 import Table from './Table'
 import axios from 'axios'
+import { sortData } from '../../helperFunc/util'
 
 function RightContainer(props) {
   const [ tableData, setTableData ] = useState([])
@@ -10,7 +11,8 @@ function RightContainer(props) {
   useEffect(() => {
     axios.get(`https://disease.sh/v3/covid-19/countries`)
       .then(res => {
-        setTableData(res.data)
+        const sortedData = sortData(res.data)
+        setTableData(sortedData)
       })
       .catch(err => err.message)
   },[])
