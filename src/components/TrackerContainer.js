@@ -17,6 +17,7 @@ const TrackerContainer = (props) => {
     const countryChange = (event) => {
         const readCountry = event.target.value
 
+        console.log(readCountry)
         setCountry(readCountry)
     }
 
