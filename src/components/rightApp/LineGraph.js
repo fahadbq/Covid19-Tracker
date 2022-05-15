@@ -1,104 +1,95 @@
 import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import numeral from "numeral";
+import axios from "axios";
+import { Line, Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js"
 
-const options = {
-  legend: {
-    display: false,
-  },
-  elements: {
-    point: {
-      radius: 0,
-    },
-  },
-  maintainAspectRatio: false,
-  tooltips: {
-    mode: "index",
-    intersect: false,
-    callbacks: {
-      label: function (tooltipItem, data) {
-        return numeral(tooltipItem.value).format("+0,0");
-      },
-    },
-  },
-  scales: {
-    xAxes: [
-      {
-        type: "time",
-        time: {
-          format: "MM/DD/YY",
-          tooltipFormat: "ll",
-        },
-      },
-    ],
-    yAxes: [
-      {
-        gridLines: {
-          display: false,
-        },
-        ticks: {
-          // Include a dollar sign in the ticks
-          callback: function (value, index, values) {
-            return numeral(value).format("0a");
-          },
-        },
-      },
-    ],
-  },
-};
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+)
 
-const buildChartData = (data, casesType) => {
-  let chartData = [];
-  let lastDataPoint;
-  for (let date in data.cases) {
-    if (lastDataPoint) {
-      let newDataPoint = {
-        x: date,
-        y: data[casesType][date] - lastDataPoint,
-      };
-      chartData.push(newDataPoint);
-    }
-    lastDataPoint = data[casesType][date];
-  }
-  return chartData;
-};
-
-function LineGraph({ casesType }) {
-  const [data, setData] = useState({});
+function LineGraph({ data, country }) {
+  console.log("data", data)
+  console.log("country", country)
+  const [dailyData, setDailyData] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
-        .then((response) => {
-          return response.json();
+    axios.get(`https://covid19.mathdro.id/api/daily`)
+      .then((response) => {
+        const modifiedData = response.data.map((ele) => {
+          return {
+            confirmed: ele.confirmed.total,
+            deaths: ele.deaths.total,
+            date: ele.reportDate,
+          }
         })
-        .then((data) => {
-          let chartData = buildChartData(data, casesType);
-          setData(chartData);
-          console.log(chartData);
-          // buildChart(chartData);
-        });
-    };
+        console.log(modifiedData)
+        setDailyData(modifiedData)
+      })
+      .catch(err => alert(err.message))
+  }, []);
 
-    fetchData();
-  }, [casesType]);
+  const lineChart = dailyData.length > 0 ? (
+    <Line 
+      data={{
+        labels: dailyData.map(ele => ele.date),
+        datasets: [
+          {
+            data: dailyData.map(ele => ele.confirmed),
+            label: "Infected",
+            borderColor: "#3333ff",
+            fill: "true",
+          },
+          {
+            data: dailyData.map(ele => ele.deaths),
+            label: "Deaths",
+            borderColor: 'red',
+            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            fill: "true",
+          },
+        ],
+      }}
+    />
+  ) : null;
+
+  const barChart = data.cases ? (
+      <Bar
+        data={{
+          labels: ['Infected', 'Recovered', 'Deaths'],
+          datasets: [
+            {
+              label: 'People',
+              backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+              data: [data.cases, data.recovered, data.deaths],
+            },
+          ],
+        }}
+        options={{
+          legend: { display: false },
+          title: { display: true, text: `Current state in ${country}` },
+        }}
+      />
+    ) : null;
 
   return (
     <div>
-      {data?.length > 0 && (
-        <Line
-          data={{
-            datasets: [
-              {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
-                data: data,
-              },
-            ],
-          }}
-          options={options}
-        />
-      )}
+      {country.country ? barChart : lineChart}
     </div>
   );
 }

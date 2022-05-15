@@ -9,6 +9,8 @@ import LineGraph from './LineGraph'
 function RightContainer(props) {
   const [ tableData, setTableData ] = useState([])
 
+  const { data, country } = props
+
   useEffect(() => {
     axios.get(`https://disease.sh/v3/covid-19/countries`)
       .then(res => {
@@ -23,8 +25,8 @@ function RightContainer(props) {
         <CardContent>
             <h3> Live Cases by Country </h3>
               <Table countries={tableData} />
-            <h3> Worldwide new cases </h3>
-              <LineGraph />
+            <h3> Global Cases </h3>
+              <LineGraph data={data} country={country} />
         </CardContent>
     </Card>
   )
