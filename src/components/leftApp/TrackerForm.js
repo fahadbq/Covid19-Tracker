@@ -7,7 +7,8 @@ import InfoBox from "./InfoBox";
 const TrackerForm = (props) => {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
-  const [ countryInfo, setCountryInfo ] = useState({})
+
+  const { getCountryData } = props // Call back func to update parent component
 
   useEffect(() => {
     axios
@@ -33,7 +34,8 @@ const TrackerForm = (props) => {
 
       //All the data...
       //from the country response
-      setCountryInfo(data)
+      // setCountryInfo(data)
+      getCountryData(data)
     })
 
   };

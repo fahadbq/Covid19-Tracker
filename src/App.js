@@ -1,6 +1,6 @@
 import "./App.css";
-import LeftContainer from "./components/leftContainer/LeftContainer";
-import RightContainer from "./components/rightContainer/RightContainer";
+import LeftContainer from "./components/leftApp/LeftContainer";
+import RightContainer from "./components/rightApp/RightContainer";
 
 function App() {
   return (
