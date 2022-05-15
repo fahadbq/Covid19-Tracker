@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardContent } from "@mui/material"
-
-import Table from './Table'
 import axios from 'axios'
 import { sortData } from '../../helperFunc/util'
+
+import Table from './Table'
+import LineGraph from './LineGraph'
 
 function RightContainer(props) {
   const [ tableData, setTableData ] = useState([])
@@ -17,14 +18,13 @@ function RightContainer(props) {
       .catch(err => err.message)
   },[])
 
-  console.log(tableData)
-
   return (
     <Card className="app__right">
         <CardContent>
             <h3> Live Cases by Country </h3>
               <Table countries={tableData} />
             <h3> Worldwide new cases </h3>
+              <LineGraph />
         </CardContent>
     </Card>
   )

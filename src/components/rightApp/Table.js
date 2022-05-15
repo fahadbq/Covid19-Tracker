@@ -5,12 +5,16 @@ function Table ({ countries }) {
 
   return (
     <div className="table">
-        { countries.map(({country, cases}, i) => {
-            return <tr key={i} >
-                <td> {country} </td>
-                <td> <strong>{cases}</strong> </td>
-              </tr>
-        })}
+        <table>
+          <tbody>
+            { countries.map(({country, cases}, i) => {
+                return <tr key={i} >
+                    <td> {country} </td>
+                    <td> <strong>{cases}</strong> </td>
+                  </tr>
+            })}
+          </tbody>
+        </table>
     </div>
   )
 }
