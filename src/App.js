@@ -10,29 +10,29 @@ function App() {
   const [ data, setData ] = useState([])
   const [ countries, setCountries ] = useState([]);
   const [ countryInfo, setCountryInfo ] = useState({})
-  const [ mapCenter, setMapCenter ] = useState({ lat: 34.80746, lng: -40.4796 })
+  const [ mapCenter, setMapCenter ] = useState({ lat: 1, lng: 32 })
   const [ mapZoom, setMapZoom ] = useState(2)
 
   useEffect(() => {
-    axios.get(`https://disease.sh/v3/covid-19/all`)
-      .then(response => {
-        setCountryInfo(response.data)
-        setData(response.data)
-      })
-      .catch(err => err.message)
 
-    axios
-      .get(`https://disease.sh/v3/covid-19/countries`)
-      .then((res) => {
-        setCountries(res.data);
-      })
-      .catch((err) => err.message);
+      const getData = async () => { // using async await to refactor the code
+        try {
+          const response1 = await axios.get(`https://disease.sh/v3/covid-19/all`)
+          setCountryInfo(response1.data)
+          setData(response1.data)
+          const response2 = await axios.get(`https://disease.sh/v3/covid-19/countries`)
+          setCountries(response2.data);
+        } catch (e) {
+          alert("err", e)
+        }
+      }
+      getData()
   }, [])
 
   const getCountryData = (data) => { // call back func to update parent state
     setCountryInfo(data)
     if(data.countryInfo){
-      setMapCenter({ lat: data.countryInfo.lat, lng: data.countryInfo.long })
+      setMapCenter([data.countryInfo.lat, data.countryInfo.long])
       setMapZoom(4)
     }
 }
@@ -47,7 +47,10 @@ function App() {
         mapZoom={mapZoom}
       />
 
-      <RightContainer data={data} country={countryInfo} />
+      <RightContainer
+        data={data} 
+        country={countryInfo} 
+        />
     </div>
   );
 }

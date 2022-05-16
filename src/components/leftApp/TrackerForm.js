@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
+import axios from "axios";
 
 const TrackerForm = ({ countries, getCountryData }) => {
   const [country, setCountry] = useState("worldwide");
@@ -12,22 +13,22 @@ const TrackerForm = ({ countries, getCountryData }) => {
         (`https://disease.sh/v3/covid-19/all`)
         : (`https://disease.sh/v3/covid-19/countries/${countryCode}`);
 
-    await fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      setCountry(countryCode)
+    try {
+      const response = await axios.get(url)
 
-      console.log(data)
       //All the data...
       //from the country response
       // setCountryInfo(data)
-      getCountryData(data)
-    })
+      getCountryData(response.data)
+    } catch(e) {
+      alert("error", e)
+    }
+      setCountry(countryCode)
   };
 
   return (
     <div className="app__header">
-      <h2> COVID-19-TRACKER </h2>
+      <h1> COVID-19 TRACKER </h1>
       <FormControl className="app__dropdown">
         <Select variant="outlined" value={country} onChange={onCountryChange}>
           <MenuItem value="worldwide"> Worldwide </MenuItem>

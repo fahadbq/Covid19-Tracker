@@ -12,6 +12,16 @@ body {
   padding: 20px;
 }
 
+.app__header > h1 {
+  color: #fc3c3c;
+  font-size: 2rem;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app__dropdown {
+  background-color: white;
+}
+
 .app__header {
   display: flex;
   align-items: center;
@@ -20,7 +30,7 @@ body {
 }
 
 .app__left {
-  flex: 0.7;
+  flex: 0.8;
 }
 
 .app__stats {
@@ -28,7 +38,13 @@ body {
   justify-content: space-between;
 }
 
-@media (max-width: 900px) {
+.app__right {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+@media (max-width: 400px) {
   .app {
     flex-direction: column;
   }
