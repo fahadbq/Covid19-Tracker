@@ -1,28 +1,15 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
-const TrackerForm = (props) => {
-  const [countries, setCountries] = useState([]);
+const TrackerForm = ({ countries, getCountryData }) => {
   const [country, setCountry] = useState("worldwide");
-
-  const { getCountryData } = props // Call back func to update parent component
-
-  useEffect(() => {
-    axios
-      .get(`https://disease.sh/v3/covid-19/countries`)
-      .then((res) => {
-        setCountries(res.data);
-      })
-      .catch((err) => err.message);
-  }, []);
 
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
 
     const url =
-      countryCode === "worldwide"
-        ? (`https://disease.sh/v3/covid-19/all`)
+      countryCode === "worldwide"? 
+        (`https://disease.sh/v3/covid-19/all`)
         : (`https://disease.sh/v3/covid-19/countries/${countryCode}`);
 
     await fetch(url)
@@ -35,7 +22,6 @@ const TrackerForm = (props) => {
       // setCountryInfo(data)
       getCountryData(data)
     })
-
   };
 
   return (

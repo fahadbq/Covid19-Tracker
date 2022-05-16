@@ -25,8 +25,6 @@ ChartJS.register(
 )
 
 function LineGraph({ data, country }) {
-  console.log("data", data)
-  console.log("country", country)
   const [dailyData, setDailyData] = useState({});
 
   useEffect(() => {
@@ -39,7 +37,6 @@ function LineGraph({ data, country }) {
             date: ele.reportDate,
           }
         })
-        console.log(modifiedData)
         setDailyData(modifiedData)
       })
       .catch(err => alert(err.message))

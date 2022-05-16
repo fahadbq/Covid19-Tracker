@@ -2,11 +2,11 @@ import TrackerForm from "./TrackerForm";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
 
-function LeftContainer({countryInfo, getCountryData}) {
+function LeftContainer({ countries, countryInfo, getCountryData, mapCenter, mapZoom}) {
 
   return (
     <div className="app__left">
-      <TrackerForm getCountryData={getCountryData} />
+      <TrackerForm getCountryData={getCountryData} countries={countries} />
 
       <div className="app__stats">
         <InfoBox title="Coronavirus Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
@@ -14,7 +14,7 @@ function LeftContainer({countryInfo, getCountryData}) {
         <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
       </div>
 
-      <Map />
+      <Map center={mapCenter} zoom={mapZoom} />
     </div>
   );
 }
