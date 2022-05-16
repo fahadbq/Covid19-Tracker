@@ -32,7 +32,7 @@ function App() {
   const getCountryData = (data) => { // call back func to update parent state
     setCountryInfo(data)
     if(data.countryInfo){
-      setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+      setMapCenter({ lat: data.countryInfo.lat, lng: data.countryInfo.long })
       setMapZoom(4)
     }
 }

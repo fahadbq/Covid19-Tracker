@@ -17,6 +17,7 @@ const TrackerForm = ({ countries, getCountryData }) => {
     .then(data => {
       setCountry(countryCode)
 
+      console.log(data)
       //All the data...
       //from the country response
       // setCountryInfo(data)

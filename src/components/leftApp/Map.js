@@ -5,8 +5,6 @@ import { showDataOnMap } from '../../helperFunc/util';
 
 function Map({ countries, casesType, center, zoom }) {
 
-  console.log(center, zoom)
-
   return (
     <div className="map">
       <MapContainer className="map__container"

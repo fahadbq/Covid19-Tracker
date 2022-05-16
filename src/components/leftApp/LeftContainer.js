@@ -14,7 +14,7 @@ function LeftContainer({ countries, countryInfo, getCountryData, mapCenter, mapZ
         <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
       </div>
 
-      <Map center={mapCenter} zoom={mapZoom} />
+      <Map countries={countries} center={mapCenter} zoom={mapZoom} />
     </div>
   );
 }
