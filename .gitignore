@@ -11,6 +11,10 @@
 # production
 /build
 
+#gitToken
+/gitToken
+
+
 # misc
 .DS_Store
 .env.local
