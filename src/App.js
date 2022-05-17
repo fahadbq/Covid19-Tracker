@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from "axios";
 import "./App.css";
+// import "leaflet/dist/leaflet.css"; Need fixing css loader issue to load map
 
 import LeftContainer from "./components/leftApp/LeftContainer";
 import RightContainer from "./components/rightApp/RightContainer";
