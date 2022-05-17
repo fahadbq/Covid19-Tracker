@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from "axios";
 import "./App.css";
-import "leaflet/dist/leaflet.css";
 
 import LeftContainer from "./components/leftApp/LeftContainer";
 import RightContainer from "./components/rightApp/RightContainer";
