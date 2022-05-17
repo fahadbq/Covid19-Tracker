@@ -1,4 +1,4 @@
-# Hosted On [Click HERE](https://point-of-sale-application-e.netlify.app).
+# Hosted On [Click HERE](https://covid19-tracker-application1.netlify.app).
 
 <h1>Covid-19 Tracker
 </h1>
