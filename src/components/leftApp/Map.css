@@ -7,9 +7,9 @@
     box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
 }
 
-/* .map .leaflet-container {
-    height: 100%;   Need leaflet.css fixing required 
-} */
+.map .leaflet-container {
+    height: 100%; 
+}
 
 .info-flag img {
     width: 100px;

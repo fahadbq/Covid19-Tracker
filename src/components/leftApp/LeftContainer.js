@@ -1,7 +1,7 @@
 import { useState } from "react"
 import TrackerForm from "./TrackerForm";
 import InfoBox from "./InfoBox";
-//import Map from "./Map";
+import Map from "./Map";
 import { prettyPrintStat } from '../../helperFunc/util'
 
 function LeftContainer({ countries, countryInfo, getCountryData, mapCenter, mapZoom}) {
@@ -40,7 +40,7 @@ function LeftContainer({ countries, countryInfo, getCountryData, mapCenter, mapZ
       </div>
 
       <h2>Map</h2>
-      {/* <Map countries={countries} center={mapCenter} zoom={mapZoom} casesType={casesType} /> */}
+      <Map countries={countries} center={mapCenter} zoom={mapZoom} casesType={casesType} />
     </div>
   );
 }
