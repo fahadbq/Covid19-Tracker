@@ -1,4 +1,4 @@
-# Hosted On [Click HERE](https://covid19-tracker-application1.netlify.app).
+# Hosted On [Click HERE](https://covid19-tracker-e.netlify.app).
 
 <h1>Covid-19 Tracker
 </h1>
