@@ -39,7 +39,7 @@ function LeftContainer({ countries, countryInfo, getCountryData, mapCenter, mapZ
         />
       </div>
 
-      <h2>Map</h2>
+      {/* <h2>Map</h2> */}
       <Map countries={countries} center={mapCenter} zoom={mapZoom} casesType={casesType} />
     </div>
   );
