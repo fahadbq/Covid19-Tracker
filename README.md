@@ -19,3 +19,7 @@
     <li>react-chartjs-2</li>
     <li>react-leaflet</li>
 </ul>
+
+## Credits
+
+#### All Credits Goes to Naz & Sonny <a href="https://github.com/CleverProgrammers/react-covid-tracker"> Original Repo </a>
